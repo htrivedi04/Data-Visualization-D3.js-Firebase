@@ -17,7 +17,7 @@ svg.attr('height', 600)
 svg.append('rect')
     .attr('width', 200)
     .attr('height', 100)
-    .attr('fill', 'lightblue')
+    .attr('fill', 'cornflowerblue')
     .attr('x', 20)
     .attr('y', 20);
 svg.append('circle')
@@ -32,6 +32,11 @@ svg.append('line')
     .attr('y2', 120)
     .attr('stroke', 'red');
 
-
+svg.append('text')
+    .attr('x', 20)
+    .attr('y', 200)
+    .attr('fill', 'grey')
+    .text('Hello World!')
+    .style('font-family', 'arial'); // To add CSS styles
 
 console.log(a, b);
