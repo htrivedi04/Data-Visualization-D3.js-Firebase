@@ -13,25 +13,32 @@ const svg = canvas.append('svg');
 svg.attr('height', 600)
     .attr('width', 600);
 
+// Making a new group in SVG
+const group = svg.append('g')
+                .attr('transform', 'translate(0, 100)')
+                .attr('transform', 'translate(50, 0)');
+
 // Append shapes to SVG container
-svg.append('rect')
+group.append('rect')
     .attr('width', 200)
     .attr('height', 100)
     .attr('fill', 'cornflowerblue')
     .attr('x', 20)
     .attr('y', 20);
-svg.append('circle')
+group.append('circle')
     .attr('r', 50)
     .attr('cx', 300)
     .attr('cy', 70)
     .attr('fill', 'pink');
-svg.append('line')
-    . attr('x1', 370)
+group.append('line')
+    .attr('x1', 370)
     .attr('x2', 400)
     .attr('y1', 20)
     .attr('y2', 120)
     .attr('stroke', 'red');
-
+    
+// Adding text to an SVG
+// Not in the same group as the shapes
 svg.append('text')
     .attr('x', 20)
     .attr('y', 200)
