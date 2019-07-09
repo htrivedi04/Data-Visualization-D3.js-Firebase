@@ -13,11 +13,15 @@ const graph = svg.append('g')
                     .attr('height', graphHeight)
                     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
+const xAxisGroup = graph.append('g')
+                        .attr('transform', `translate(0, ${graphHeight})`);
+const yAxisGroup = graph.append('g');
+
 d3.json('menu.json').then(data => {
     // Making a linear y-scale
     const y = d3.scaleLinear()
                     .domain([0, 1000])
-                    .range([0, 500]);
+                    .range([graphHeight, 0]);
     
     // Making a band scale for x-scale
     const x = d3.scaleBand()
@@ -31,11 +35,12 @@ d3.json('menu.json').then(data => {
     // Join the data to rect
     const rects = graph.selectAll('rect')
                         .data(data)
+    
     rects.attr('width', x.bandwidth)
             .attr('height', d => y(d.orders))
             .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .attr('y', d => 550 - y(d.orders));
+            .attr('y', d => graphHeight - y(d.orders));
 
     // Append the enter selection to the DOM
     rects.enter()
@@ -44,6 +49,14 @@ d3.json('menu.json').then(data => {
             .attr('height', d => y(d.orders))
             .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .attr('y', d => 550 - y(d.orders));
+            .attr('y', d => graphHeight - y(d.orders));
+    
+    // Create and call the axes
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y);
+
+    xAxisGroup.call(xAxis);
+    yAxisGroup.call(yAxis);
+
     
 })
